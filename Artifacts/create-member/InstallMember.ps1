@@ -1,16 +1,9 @@
 #*******************************************************************************
-#* File:           InstallMember.ps1
-#* Purpose:        Create Member Server 
-#* Usage:          COMMAND_LINE_USAGE_GOES_HERE
-#* Version:        2.1.0 (14-04-2011)
-#* Technology:     POWERSHELL,WMI,ADSI,ETC.
-#* Requirements:   Windows 2012 R2 Server
-#*                 Powershell 1.0
-#* History:	   	   0.0 27-02-2008;Paul-Christiaan Diks;Initial Version
-#*				   1.0.0;29-03-2016;Paul-Christiaan Diks;Initial Version
-#*		   		   1.x;dd-mm-2008;AUTHOR;DESCRIPTION_OF_CHANGES_GOES_HERE
-#* ToDo			   
-#* Copyright(C)2008 StartReady.com
+#* File:            InstallMember.ps1
+#* Purpose:         Create Member Server 
+#
+#* Requirements:    Windows 2012 R2 Server
+#* Copyright(C)2016 StartReady.com
 #*******************************************************************************
 
 Param(
@@ -92,39 +85,14 @@ Write-Logfile "Installing dependencies" $LogFile
 
 Write-Logfile "Installing RSAT-AD-Tools..." $LogFile
 Add-WindowsFeature -Name RSAT-AD-Tools, Rsat-AD-PowerShell -LogPath $LogDir\RSAT-AD-Tools.log
-Write-Logfile "Installing AD-Domain-Services..." $LogFile
-Add-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManagementTools -LogPath $LogDir\AD-Domain-Services.log
-Write-Logfile "Installing DNS..." $LogFile
-Add-WindowsFeature -Name DNS -IncludeAllSubFeature -IncludeManagementTools -LogPath $LogDir\DNS.log
-Write-Logfile "Installing DPMC..." $LogFile
-Add-WindowsFeature -Name GPMC -IncludeAllSubFeature -IncludeManagementTools -LogPath $LogDir\GPMC.log
-#Add-WindowsFeature -Name NET-Framework-Core -Source R:\Sources\SxS -LogPath $LogDir\Net-Telnet.log
 
-############################################################
-#Install AD Forest
-############################################################
-Write-Logfile "Install New Active Directory Forest" $LogFile
-$Percentage=[math]::Floor($Percentage+$Stap)
-$Progress.SimpleStatusUpdateMessage2($ReportServer,"Installing Active Directory Forest","$Percentage", 5)
-
-Import-Module ADDSDeployment
 $SafePassword=ConvertTo-SecureString -String $UPassword -AsPlainText -Force
-Install-ADDSForest -CreateDnsDelegation:$False `
--DatabasePath "C:\Windows\NTDS" `
--SysvolPath "C:\Windows\SYSVOL" `
--DomainMode "Win2012" `
--DomainName $ADDomain `
--DomainNetbiosName $NetBios `
--ForestMode "Win2012" `
--InstallDns:$true `
--NoRebootOnCompletion:$True `
--SafeModeAdministratorPassword $SafePassword `
--Force:$true `
--LogPath $LogDir\Install-ADDSForest.txt
+$Credential = New-Object System.Management.Automation.PSCredential($ADUser,$SafePassword)
+Add-Computer -DomainName $ADDomain -Credential $Credential
 
 if ($? -eq $FALSE)
 {
-	Write-Logfile "Error installing New Active Directory Forest, Deployment cannot continu!" $LOG_FILE
+	Write-Logfile "Error joining domain, deployment cannot continu!" $LOG_FILE
 	#Resolve-Error -LogFile $LogFile -SeparatorString $Separator -IsCritical $True
     exit 1
 }

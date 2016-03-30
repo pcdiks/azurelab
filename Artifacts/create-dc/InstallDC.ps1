@@ -1,16 +1,9 @@
 #*******************************************************************************
-#* File:           InstallDC.ps1
-#* Purpose:        Create Domain Controller 
-#* Usage:          COMMAND_LINE_USAGE_GOES_HERE
-#* Version:        2.1.0 (14-04-2011)
-#* Technology:     POWERSHELL,WMI,ADSI,ETC.
-#* Requirements:   Windows 2008 R2 Server
-#*                 Powershell 1.0
-#* History:	   	   0.0 27-02-2008;Paul-Christiaan Diks;Initial Version
-#*				   1.0.0;29-03-2016;Paul-Christiaan Diks;Initial Version
-#*		   		   1.x;dd-mm-2008;AUTHOR;DESCRIPTION_OF_CHANGES_GOES_HERE
-#* ToDo			   
-#* Copyright(C)2008 StartReady.com
+#* File:            InstallDC.ps1
+#* Purpose:         Create Domain Controller 
+#
+#* Requirements:    Windows 2012 R2 Server
+#* Copyright(C)2016 StartReady.com
 #*******************************************************************************
 
 Param(
