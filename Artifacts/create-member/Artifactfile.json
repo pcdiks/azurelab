@@ -23,6 +23,6 @@
   
   },
   "runCommand": {
-    "commandToExecute": "[concat('powershell.exe -executionpolicy bypass -File InstallMember.ps1',' -DCPassword ', parameters('DCPassword'), ' -NetBiosName ', parameters(DomainNetbios), ' -DomainFqdn ', parameters(DomainFQDN)" 
+    "commandToExecute": "[concat('powershell.exe -executionpolicy bypass -File InstallMember.ps1',' -Password ', parameters('DCPassword'), ' -User ', parameters(DCUser), ' -DomainFqdn ', parameters(DomainFQDN)" 
   }
 }
