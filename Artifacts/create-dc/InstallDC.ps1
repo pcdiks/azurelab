@@ -14,7 +14,9 @@
 #*******************************************************************************
 
 Param(
-  [string]$DCPassword
+  [string]$DCPassword,
+  [string]$NetBiosName,
+  [string]$DomainFqdn
 )
 
 # ---------------------------------------------------------------------------------------------------
@@ -76,10 +78,12 @@ Write-Logfile $Separator $LogFile
 ############################################################
 Write-Logfile $Separator $LogFile
 Write-Logfile "Start reading variables from config file" $LogFile
-$NetBios="skype-lab"
-$ADDomain="skype-lab.intra"
+$NetBios=$NetBiosName
+$ADDomain=$DomainFqdn
 $Password=$DCPassword
 if ($Password -eq "") {$Password="Welkom01"}
+if ($NetBios -eq "") {$NetBios="test"}
+if ($ADDomain -eq "") {$ADDomain="test.intra"}
 
 ############################################################
 #Install dependencies

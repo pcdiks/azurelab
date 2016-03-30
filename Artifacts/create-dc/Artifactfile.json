@@ -9,10 +9,20 @@
       "type": "string",
       "displayName": "Domain Admin Password",
       "description": "Type the password used for the Domain Admin Account"
+    },
+    "DomainNetbios": {
+      "type": "string",
+      "displayName": "Netbios Domain Name",
+      "description": "Type the Netbios Domain Name for the Active Directory (e.g. fabrikam)"
+    },
+      "DomainFQDN": {
+      "type": "string",
+      "displayName": "Domain FQDN",
+      "description": "Type the Active Directory FQDN (e.g. fabrikam.intra)"
     }  
+  
   },
   "runCommand": {
-    "commandToExecute": "[concat('powershell.exe -executionpolicy bypass -File InstallDC.ps1',' -DCPassword ',  parameters('DCPassword')"
- 
+    "commandToExecute": "[concat('powershell.exe -executionpolicy bypass -File InstallDC.ps1',' -DCPassword ', parameters('DCPassword'), ' -NetBiosName ', parameters(DomainNetbios), ' -DomainFqdn ', parameters(DomainFQDN)" 
   }
 }
