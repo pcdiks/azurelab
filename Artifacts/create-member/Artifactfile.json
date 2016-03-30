@@ -1,0 +1,28 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2015-01-01/dtlArtifacts.json",
+  "title": "Create a Member Server",
+  "description": "Create a Member Server and join the domain",
+  "iconUri": "https://chocolatey.org/content/packageimages/WindowsAzurePowershell.0.9.7.png",
+  "targetOsType": "Windows",
+  "parameters": {
+    "DCUser": {
+      "type": "string",
+      "displayName": "Domain Admin User",
+      "description": "Type the username used to join the domain"
+    },
+    "DCPassword": {
+      "type": "string",
+      "displayName": "Domain Admin Password",
+      "description": "Type the password used to join the domain"
+    },
+      "DomainFQDN": {
+      "type": "string",
+      "displayName": "Domain FQDN",
+      "description": "Type the Active Directory FQDN (e.g. fabrikam.intra)"
+    }  
+  
+  },
+  "runCommand": {
+    "commandToExecute": "[concat('powershell.exe -executionpolicy bypass -File InstallMember.ps1',' -DCPassword ', parameters('DCPassword'), ' -NetBiosName ', parameters(DomainNetbios), ' -DomainFqdn ', parameters(DomainFQDN)" 
+  }
+}
