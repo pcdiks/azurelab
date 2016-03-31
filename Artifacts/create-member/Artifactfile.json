@@ -11,7 +11,7 @@
       "description": "Type the username used to join the domain"
     },
     "DCPassword": {
-      "type": "string",
+      "type": "securestring",
       "displayName": "Domain Admin Password",
       "description": "Type the password used to join the domain"
     },
