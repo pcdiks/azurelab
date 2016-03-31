@@ -86,6 +86,23 @@ Write-Logfile "Installing dependencies" $LogFile
 Write-Logfile "Installing RSAT-AD-Tools..." $LogFile
 Add-WindowsFeature -Name RSAT-AD-Tools, Rsat-AD-PowerShell -LogPath $LogDir\RSAT-AD-Tools.log
 
+############################################################
+#Create Desktop Shortcut
+############################################################
+Write-Logfile "Add logoff shortcut to the all users desktop" $LogFile
+$ShortCutName="C:\Users\Public\Desktop\Logoff.lnk"
+$Executable="C:\Windows\System32\Logoff.exe"
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut($ShortCutName)
+$Shortcut.TargetPath = $Executable
+$Shortcut.Description="Logoff from Windows"
+$Shortcut.IconLocation="%SystemRoot%\system32\SHELL32.dll,44"
+$Shortcut.Save()
+
+############################################################
+#Join Active Directory Domain
+############################################################
+Write-Logfile "Joining domain $ADDomain..." $LogFile
 $SafePassword=ConvertTo-SecureString -String $UPassword -AsPlainText -Force
 $Credential = New-Object System.Management.Automation.PSCredential($ADUser,$SafePassword)
 Add-Computer -DomainName $ADDomain -Credential $Credential
