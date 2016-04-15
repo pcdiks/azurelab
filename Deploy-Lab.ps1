@@ -66,14 +66,13 @@ Catch{
 	}
 	else {
 		Write-Host "Creating Resource Group..." -ForegroundColor Yellow
-		#$New-AzureRmResourceGroup -Name $ResourceGroupName -Location $Location
+		New-AzureRmResourceGroup -Name $ResourceGroupName -Location $Location
 	}
 }
 
-Try{
-	Get-AzureRmAutomationAccount -ResourceGroupName $ResourceGroupName
-}
-Catch{
+$AAExists=Get-AzureRmAutomationAccount -ResourceGroupName $ResourceGroupName -Name $AutomationAccountName -ErrorAction SilentlyContinue
+
+if ($AAExists -eq $nul){
 	Write-Host "Automation Account does not exist" -ForegroundColor Yellow
 	$Answer = Read-Host "Do you want to create it (y/n)"
 	if ($Answer.tolower() -eq "n"){
@@ -81,7 +80,7 @@ Catch{
 	}
 	else {
 		Write-Host "Creating Automation Account..." -ForegroundColor Yellow
-		#New-AzureRmAutomationAccount -ResourceGroupName $ResourceGroupName -Name $AutomationAccountName -Location $Location
+		New-AzureRmAutomationAccount -ResourceGroupName $ResourceGroupName -Name $AutomationAccountName -Location $Location
 	}	
 }
 
