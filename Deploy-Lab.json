@@ -102,7 +102,7 @@
         {
             "name": "[parameters('accountName')]",
             "type": "Microsoft.Automation/automationAccounts",
-            "apiVersion": "2015-01-01-preview",
+            "apiVersion": "2015-08-01",
             "location": "[parameters('regionId')]",
             "dependsOn": [],
             "tags": {},
@@ -115,7 +115,7 @@
                 {
                     "name": "[variables('configurationName')]",
                     "type": "configurations",
-                    "apiVersion": "2015-01-01-preview",
+                    "apiVersion": "2015-08-01",
                     "location": "[parameters('regionId')]",
                     "tags": {},
                     "dependsOn": [
@@ -135,7 +135,7 @@
                 {
                     "name": "[parameters('dscCompilationJobId')]",
                     "type": "compilationjobs",
-                    "apiVersion": "2015-01-01-preview",
+                    "apiVersion": "2015-08-01",
                     "location": "parameters('regionId')]",
                     "tags": {},
                     "dependsOn": [
@@ -151,7 +151,7 @@
                 {
                     "name": "[variables('runbookName')]",
                     "type": "runbooks",
-                    "apiVersion": "2015-01-01-preview",
+                    "apiVersion": "2015-08-01",
                     "location": "[parameters('regionId')]",
                     "dependsOn": [
                         "[concat('Microsoft.Automation/automationAccounts/', parameters('accountName'))]"
@@ -171,7 +171,7 @@
                 {
                     "name": "[variables('credentialName')]",
                     "type": "credentials",
-                    "apiVersion": "2015-01-01-preview",
+                    "apiVersion": "2015-08-01",
                     "location": "[parameters('regionId')]",
                     "dependsOn": [
                         "[concat('Microsoft.Automation/automationAccounts/', parameters('accountName'))]"
@@ -185,7 +185,7 @@
                 {
                     "name": "[parameters('runbookJobId')]",
                     "type": "jobs",
-                    "apiVersion": "2015-01-01-preview",
+                    "apiVersion": "2015-08-01",
                     "location": "[parameters('regionId')]",
                     "dependsOn": [
                         "[concat('Microsoft.Automation/automationAccounts/', parameters('accountName'))]",
@@ -207,7 +207,7 @@
                 {
                     "name": "[variables('scheduleName')]",
                     "type": "schedules",
-                    "apiVersion": "2015-01-01-preview",
+                    "apiVersion": "2015-08-01",
                     "location": "[parameters('regionId')]",
                     "dependsOn": [
                         "[concat('Microsoft.Automation/automationAccounts/', parameters('accountName'))]"
@@ -224,7 +224,7 @@
                 {
                     "name": "[parameters('jobScheduleId')]",
                     "type": "jobSchedules",
-                    "apiVersion": "2015-01-01-preview",
+                    "apiVersion": "2015-08-01",
                     "location": "[parameters('regionId')]",
                     "dependsOn": [
                         "[concat('Microsoft.Automation/automationAccounts/', parameters('accountName'))]",
